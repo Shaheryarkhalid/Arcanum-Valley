@@ -4,45 +4,52 @@ from player import Player
 from sprite import sprites
 from map import TileKind, Map
 
-pygame.init()
-
 # Setup
+pygame.init()
 pygame.display.set_caption("Arcanum Valley")
-screen = pygame.display.set_mode((800,600))
-clear_color = (30, 150, 50)
-running = True
-player = Player("images/idle.png",150,50)
-tile_kinds = [
-	TileKind("dirt", "images/dirt.png", False),
-	TileKind("grass", "images/grass.png", False),
-	TileKind("water", "images/water.png", False),
-	TileKind("wood", "images/wood.png", False),
+# Constants
+SCREEN = pygame.display.set_mode((800, 600))
+CLEAR_COLOR = (30, 150, 50)
+PLAYER = Player("images/idle.png", 150, 50)
+TILE_KINDS = [
+    TileKind("dirt", "images/dirt.png", False),
+    TileKind("grass", "images/grass.png", False),
+    TileKind("water", "images/water.png", False),
+    TileKind("wood", "images/wood.png", False),
 ]
+MAP = Map("maps/start.map", TILE_KINDS, 32)
 
-map = Map("maps/start.map", tile_kinds, 32)
+running = True
 
 # Game Loop:
 
-while running:
-	for event in pygame.event.get():
-		# Quit Game
-		if event.type == pygame.QUIT:
-			running = False
-		# Handle Pressed Keys
-		elif event.type == pygame.KEYDOWN:
-			input.keys_down.add(event.key)
-		elif event.type == pygame.KEYUP:
-			input.keys_down.remove(event.key)
 
-	# Update Code
-	player.update()
+def main():
+    global running
+    while running:
+        for event in pygame.event.get():
+            # Quit Game
+            if event.type == pygame.QUIT:
+                running = False
+            # Handle Pressed Keys
+            elif event.type == pygame.KEYDOWN:
+                input.keys_down.add(event.key)
+            elif event.type == pygame.KEYUP:
+                input.keys_down.remove(event.key)
 
-	# Draw Code
-	screen.fill(clear_color)
-	map.draw(screen)
-	for s in sprites:
-		s.draw(screen)
-	pygame.display.flip()
-	pygame.time.delay(10)
+        # Update Code
+        PLAYER.update()
 
-pygame.quit()
+        # Draw Code
+        SCREEN.fill(CLEAR_COLOR)
+        MAP.draw(SCREEN)
+        for s in sprites:
+            s.draw(SCREEN)
+        pygame.display.flip()
+        pygame.time.delay(10)
+
+    pygame.quit()
+
+
+if __name__ == "__main__":
+    main()
