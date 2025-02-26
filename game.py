@@ -3,13 +3,15 @@ import input
 from player import Player
 from sprite import sprites
 from map import TileKind, Map
+from camera import create_screen
 
 # Setup
 pygame.init()
-pygame.display.set_caption("Arcanum Valley")
+
 # Constants
 
-SCREEN = pygame.display.set_mode((800, 600))
+SCREEN_WIDTH = 800
+SCREEN_HEIGHT = 600
 CLOCK = pygame.time.Clock()
 CLEAR_COLOR = (30, 150, 50)
 TILE_KINDS = [
@@ -20,6 +22,7 @@ TILE_KINDS = [
 ]
 MAP = Map("maps/start.map", TILE_KINDS, 32)
 
+SCREEN =  create_screen(SCREEN_WIDTH, SCREEN_HEIGHT, "Arcanum Valley")
 running = True
 dt = 0
 
@@ -35,7 +38,7 @@ def main():
 
     Player.containers = (updateables,)
 
-    player = Player("images/idle.png", 150, 50)
+    player = Player("images/idle.png", SCREEN_WIDTH//2, SCREEN_HEIGHT//2)
     while running:
         for event in pygame.event.get():
             # Quit Game
