@@ -19,6 +19,7 @@ TILE_KINDS = [
     TileKind("grass", "images/grass.png", False),
     TileKind("water", "images/water.png", False),
     TileKind("wood", "images/wood.png", False),
+    TileKind("tree", "images/tree.png",False),
 ]
 MAP = Map("maps/start.map", TILE_KINDS, 32)
 
