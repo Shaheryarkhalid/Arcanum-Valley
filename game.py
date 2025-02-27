@@ -36,8 +36,10 @@ def main():
     global dt
 
     updateables = pygame.sprite.Group()
+    drawables = pygame.sprite.Group()
 
     Player.containers = (updateables,)
+    Map.containers = (drawables,)
 
     player = Player("images/idle.png", SCREEN_WIDTH//2, SCREEN_HEIGHT//2)
     while running:
@@ -57,7 +59,8 @@ def main():
 
         # Draw Code
         SCREEN.fill(CLEAR_COLOR)
-        MAP.draw(SCREEN)
+        drawables.draw(SCREEN)
+        # MAP.draw(SCREEN)
         for s in sprites:
             s.draw(SCREEN)
         pygame.display.flip()
